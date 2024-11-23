@@ -1,3 +1,10 @@
-[01.cpp](01.cpp)
+# Compiler Design Lab
+
+## Files
+
+[01.cpp](01.cpp)  
 [02.cpp](02.cpp)
 
+## ABOUT THIS REPOSITORY
+
+THIS REPOSITORY CONTAINS CODE FOR COMPILER DESIGN LAB ASSIGNMENTS.
