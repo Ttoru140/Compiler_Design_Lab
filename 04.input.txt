@@ -1,5 +1,5 @@
 int
-jnt
+Znt
 null
 flag
 2
