@@ -1,63 +1,76 @@
 /*
 Build a lexical analyzer implementing the following regular expressions:
-Integer variable = (i-nI-N)(a-zA-Z0-9)*
+Integer variable = (i-nI-N)(a-zA-Z0-9)*    alphaneumeric
 ShortInt Number = (1-9)|(1-9)(0-9)|(1-9)(0-9)(0-9)|(1-9)(0-9)(0-9)(0-9)
 LongInt Number = (1-9)(0-9)(0-9)(0-9)(0-9)+
 Invalid Input or Undefined = Otherwise
 */
-#include <bits/stdc++.h>
+
+#include<bits/stdc++.h>
 using namespace std;
 int main()
 {
-    freopen("04.input.txt", "r", stdin);
+    freopen("04.input.txt","r",stdin);  // taking file input
     string word;
 
-    while (getline(cin, word))
+    while(getline(cin,word))   //get the input using while loop
     {
-        bool isValid = true;
-        if (tolower(word[0]) >= 'i' && tolower(word[0]) <= 'n')
+        bool isValid = true;   // first assume it true;
+        if(tolower(word[0])>='i' && tolower(word[0])<= 'n') // check first letter small and big
         {
-            for (int i = 1; i < word.size(); i++)
+            for(int i =1; i<word.size(); i++)    // check every letter. is it alphaneumeric or not
             {
-                if (!isalnum(word[i]))
+                if(!isalnum (word[i]))
+                {
+                    isValid = false;      // is not then set isValid as false and break
+                    break;
+                }
+
+
+            }
+            if(isValid) cout<<word <<":"<<"Integer\n";
+        }
+
+        else if(word[0]<='9' && word[0]>'0' )      // now check the first letter as digit
+        {
+            for(int i=1; i<word.size(); i++)     // check all letter
+            {
+                if(!isdigit(word[i]))
                 {
                     isValid = false;
                     break;
                 }
             }
-            if(isValid) cout << word << " : "<< "Integer variable\n";
-        }
-        else if(word[0] <= '9' && word[0] >= '1') {
-            for(int i = 1; i < word.size(); i++) {
-                if(!isdigit(word[i])) {
-                    isValid = false;
-                    break;
+            if(isValid)                       // check shortInt of longInt
+            {
+                if(word.size()< 5)
+                {
+                    cout<<word<<":"<<"ShortInt\n";
+                }
+                else
+                {
+                    cout<<word<<":"<<"LongInt\n";
                 }
             }
-            if(isValid) {
-                if(word.size() < 5) cout<<word<<" : "<<"ShortInt Number\n";
-                else cout<<word<<" : "<<"LongInt Number\n";
-            }
+
         }
-        else {
-            isValid = false;
-        }
-        if(!isValid) {
-            cout << word << " : "<< "Invalid Input or Undefined\n";
-        }
+        else isValid = false;                              // id not match anyone then print as false
+        if(!isValid) cout<<word <<":"<<"Invalid\n";
+
     }
-    return 0;
 }
 
-//int : Integer variable
-//jnt : Integer variable
-//null : Integer variable
-//flag : Invalid Input or Undefined
-//2 : ShortInt Number
-//32 : ShortInt Number
-//345 : ShortInt Number
-//04 : Invalid Input or Undefined
-//4567 : ShortInt Number
-//012334 : Invalid Input or Undefined
-//12345 : LongInt Number
-//t5y : Invalid Input or Undefined
+/*
+int:Integer
+Znt:Integer
+null:Integer
+flag:Invalid
+2:ShortInt
+32:ShortInt
+345:ShortInt
+04:Invalid
+4567:ShortInt
+012334:Invalid
+12345:LongInt
+1023:ShortInt
+t5y:Invalid */
